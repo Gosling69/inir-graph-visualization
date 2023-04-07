@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import {Row, Col, Container} from "react-bootstrap"
+import { Row, Col, Container } from "react-bootstrap";
 const AccordItem = ({ data, type }) => {
-    console.log(data)
     let navigate = useNavigate();
     const displayIndex = type === "reverse" ? 0 : 1;
     const linkStyle = {
@@ -26,16 +25,16 @@ const AccordItem = ({ data, type }) => {
                     >
                         {prop.arguments[displayIndex].label}
                     </p>
-                    {prop.attributes &&
-                        <Container className="mb-3 mt-1">
-                        {Object.values(prop.attributes).map(([arg]) =>
-                            <Row>
-                                <Col>{arg.label}</Col>
-                                <Col>{arg.literal ?? arg.value}</Col>
-                            </Row>
-                        )}
+                    {prop.attributes && (
+                        <Container className="mb-3 mx-4 mt-1">
+                            {Object.values(prop.attributes).map(([arg]) => (
+                                <Row>
+                                    <Col>{arg.label}</Col>
+                                    <Col>{arg.literal ?? arg.value}</Col>
+                                </Row>
+                            ))}
                         </Container>
-                    }
+                    )}
                 </>
             ))}
         </div>

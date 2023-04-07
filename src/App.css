@@ -83,17 +83,26 @@ div.dx-treelist-icon-container > div > span {
   color: inherit !important;
 } */
 
-/* .accordion-header ::after {
-  color: inherit !important;
-} */
+.accordion-button.collapsed::after {
+    margin-left: 250px;
+    color: inherit !important;
+}
+.accordion-button::after {
+    margin-left: 250px;
+    color: inherit !important;
+}
+
+#controlPanelButton > button::after {
+    margin-left: auto !important;
+}
 .relationAccordion > div > h2 > button {
-  background-color: inherit !important;
-  border-top: solid 1px;
-  border-bottom: solid 1px;
-  border-top-color: #b6f8f0 !important;
-  border-bottom-color: #b6f8f0 !important;
-  color: inherit !important;
-  padding-left: 0;
+    background-color: inherit !important;
+    border-top: solid 1px;
+    border-bottom: solid 1px;
+    border-top-color: #b6f8f0 !important;
+    border-bottom-color: #b6f8f0 !important;
+    color: inherit !important;
+    padding-left: 0;
 }
 .relationAccordion > div > h2 > button:only-child {
     border-top: solid 1px !important;

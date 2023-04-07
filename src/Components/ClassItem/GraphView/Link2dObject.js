@@ -3,7 +3,7 @@ const Link2dObject = (link, ctx, globalScale, showLinks, paintLinks) => {
     if (!link.label) return;
     link.color = paintLinks(link);
     if (link.skipLabel) return;
-    return
+    return;
     const MAX_FONT_SIZE = 15;
     const LABEL_NODE_MARGIN = 10;
     const start = link.source;

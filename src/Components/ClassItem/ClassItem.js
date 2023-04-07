@@ -15,42 +15,36 @@ import { cloneDeep } from "lodash";
 // import { v4 as uuidv4 } from 'uuid';
 
 const ClassItem = () => {
-    // Draw attributes for item relations
-    // On Link hover show attributes of relation
-    // On node hover show properties
-    // no on node click, draw full graph
     const [activeTab, setActiveTab] = useState("tableView");
     const targetRef = useRef(null);
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-    useLayoutEffect(() => {
-        // console.log(targetRef)
-        // if (targetRef.current.parent){
-        //     console.log("PARENT")
-        // }
-        if (targetRef.current) {
-            setDimensions({
-                width: targetRef.current.offsetWidth,
-                height: targetRef.current.offsetHeigth,
-            });
-        }
-    }, []);
-    useLayoutEffect(() => {
-        console.log(targetRef);
-        console.log(
-            targetRef.current.offsetWidth,
-            targetRef.current.offsetHeight
-        );
-        setDimensions({
-            width: targetRef.current.offsetWidth,
-            height: targetRef.current.offsetHeight,
-        });
-        // if (targetRef.current) {
-        //     setDimensions({
-        //         width: targetRef.current.offsetWidth,
-        //         height: targetRef.current.offsetHeight
-        //     });
-        // }
-    }, [targetRef]);
+    //   useLayoutEffect(() => {
+    //     // console.log(targetRef)
+    //     // if (targetRef.current.parent){
+    //     //     console.log("PARENT")
+    //     // }
+    //     if (targetRef.current) {
+    //         // console.log(targetRef)
+    //       setDimensions({
+    //         width: targetRef.current.clientWidth,
+    //         height: targetRef.current.clientHeight,
+    //       });
+    //     }
+    //   }, []);
+    //   useLayoutEffect(() => {
+    //     // console.log(targetRef);
+    //     // console.log(targetRef.current.offsetWidth, targetRef.current.offsetHeight);
+    //     setDimensions({
+    //         width: targetRef.current.clientWidth,
+    //         height: targetRef.current.clientHeight,
+    //     });
+    //     // if (targetRef.current) {
+    //     //     setDimensions({
+    //     //         width: targetRef.current.offsetWidth,
+    //     //         height: targetRef.current.offsetHeight
+    //     //     });
+    //     // }
+    //   }, [targetRef]);
 
     let params = useParams();
     const [data, setData] = useState({});
@@ -97,42 +91,31 @@ const ClassItem = () => {
     };
     useEffect(() => {
         refresh();
-        // setTimeout(() => setActiveTab("tableView"), 1000)
-        // setTimeout(() => setFilter([]), 100)
     }, []);
     useEffect(() => {
         refresh();
-        // setTimeout(() => setActiveTab("tableView"), 1000)
-        // setTimeout(() => setFilter([]), 100)
     }, [params.objectId]);
 
-    useEffect(() => {
-        function handleWindowResize() {
-            // console.log(targetRef.current)
-            setDimensions({
-                width: targetRef.current.offsetWidth,
-                height: targetRef.current.offsetHeigth,
-            });
-        }
-        window.addEventListener("resize", handleWindowResize);
-        return () => {
-            window.removeEventListener("resize", handleWindowResize);
-        };
-    }, []);
+    //   useEffect(() => {
+    //     function handleWindowResize() {
+    //     //   console.log(targetRef)
+    //       setDimensions({
+    //         width: targetRef.current.clientWidth,
+    //         height: targetRef.current.clientHeight,
+    //       });
+    //     }
+    //     window.addEventListener("resize", handleWindowResize);
+    //     return () => {
+    //       window.removeEventListener("resize", handleWindowResize);
+    //     };
+    //   }, []);
 
-    const bgColor = "#CC7ED25C";
-
-    const tabStyle = {
-        borderRadius:
-            activeTab === "tableView"
-                ? "0px 10px 10px 10px"
-                : "10px 10px 10px 10px",
-        backgroundColor: bgColor,
-    };
     const buttonActiveStyle = {
         borderRadius: "10px 10px 0px 0px",
         border: "none",
-        // borderBottom:"0px",
+        textDecoration: "underline",
+        textUnderlinePosition: "under",
+        textUnderlineOffset: "9px",
         backgroundColor: "rgba(204, 126, 210, 0)",
         color: "inherit",
         minWidth: "300px",
@@ -175,16 +158,12 @@ const ClassItem = () => {
             >
                 Graph View
             </Button>
-            {/* {filter.reduce((prev, curr) => prev+=curr, "")} */}
-            <Row>
-                <Col ref={targetRef}>
+            <Row ref={targetRef}>
+                <Col>
                     {activeTab === "tableView" ? (
                         <>
                             {rootId.length ? (
-                                <TableView
-                                    data={data}
-                                    // key={rootId + "table"}
-                                />
+                                <TableView data={data} />
                             ) : (
                                 <Spinner
                                     className="text-center"
@@ -219,41 +198,6 @@ const ClassItem = () => {
                             )}
                         </>
                     )}
-                    {/* <Tab.Content style={tabStyle} >
-                <Tab.Pane                     
-                    eventKey="tableView" 
-                    title="Table View"
-                >
-                    
-                    {rootId.length ?
-                        <TableView
-                            data={data}
-                            // key={rootId + "table"}
-                        />
-                        :
-                        <Spinner  animation="border" />
-                    }
-                </Tab.Pane>
-                <Tab.Pane 
-                    eventKey="graphView" 
-                    title="Graph View"
-                    
-                >
-                    {rootId.length ?
-                        <GraphView
-                            graphData={graphData}
-                            root={rootId}
-                            key={rootId + "graph" + filter.reduce((prev, curr) => prev+=curr,"")} //dont touch, without key wont redraw graph for new data
-                            filter={filter}
-                            hideRelation={hideRelation}
-                            width={dimensions.width}
-                            height={dimensions.height}
-                        />
-                        :
-                        <Spinner  animation="border" />
-                    }
-                </Tab.Pane>
-            </Tab.Content> */}
                 </Col>
             </Row>
         </Tab.Container>

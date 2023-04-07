@@ -27,7 +27,9 @@ const AccordTitle = ({ data, type }) => {
                                     {prop.arguments[1].conceptLabel}
                                 </p>
                             ) : (
-                                <p>{prop.arguments[0].conceptLabel}</p>
+                                <p style={{ marginLeft: "auto" }}>
+                                    {prop.arguments[0].conceptLabel}
+                                </p>
                             )}
 
                             {/* //     </Col>

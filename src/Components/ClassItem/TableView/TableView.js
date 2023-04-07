@@ -17,8 +17,8 @@ const TableView = ({ data }) => {
         paddingTop: "18px",
     };
     const bodyStyle = {
-        paddingLeft:0,
-    }
+        paddingLeft: 0,
+    };
     // fix accordions, add key for uniqueness
     return (
         <div
@@ -68,7 +68,9 @@ const TableView = ({ data }) => {
                                                         />
                                                     }
                                                 </Accordion.Header>
-                                                <Accordion.Body style={bodyStyle}>
+                                                <Accordion.Body
+                                                    style={bodyStyle}
+                                                >
                                                     <AccordItem
                                                         type="straight"
                                                         data={entry}
@@ -105,7 +107,9 @@ const TableView = ({ data }) => {
                                                         />
                                                     }
                                                 </Accordion.Header>
-                                                <Accordion.Body style={bodyStyle}>
+                                                <Accordion.Body
+                                                    style={bodyStyle}
+                                                >
                                                     <AccordItem
                                                         type="reverse"
                                                         data={entry}

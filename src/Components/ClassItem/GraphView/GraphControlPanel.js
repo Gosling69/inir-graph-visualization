@@ -1,6 +1,7 @@
 import { text } from "d3";
 import { useState } from "react";
 import { Accordion, Button, Row, Container } from "react-bootstrap";
+import { useNavigate, useParams } from "react-router-dom";
 // import { DropDownButton } from "devextreme-react"
 
 const GraphControlPanel = ({
@@ -10,6 +11,8 @@ const GraphControlPanel = ({
     showLinks,
     relations,
 }) => {
+    let navigate = useNavigate();
+    let params = useParams();
     // const bgColor = "rgba(182, 248, 240, 0.7)"
     const bgColor = "#CC7ED25C";
 
@@ -81,6 +84,19 @@ const GraphControlPanel = ({
             <Row className="mb-2">
                 <Button onClick={hideLinks} style={buttonStyle}>
                     {showLinks ? "Hide" : "Show"} Link Text
+                </Button>
+            </Row>
+            <Row className="mb-2">
+                <Button
+                    onClick={() =>
+                        navigate(
+                            "../fullgraph/" +
+                                encodeURIComponent(params.objectId)
+                        )
+                    }
+                    style={buttonStyle}
+                >
+                    Go To 3D
                 </Button>
             </Row>
             <Row>
