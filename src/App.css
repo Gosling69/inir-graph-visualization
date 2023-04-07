@@ -1,38 +1,142 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css?family=Play");
+@import url("https://fonts.googleapis.com/css?family=Russo One");
+
+body {
+    font-family: "Play" !important;
+    color: #b6f8f0 !important;
+    margin-bottom: 0 !important;
+    height: 100vh;
+    background: linear-gradient(
+        243.18deg,
+        #014b4b 0%,
+        #011f4b 50.22%,
+        #4b0120 100%
+    );
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#controlPanelButton > button {
+    border-radius: inherit;
+    border: none;
+    background-color: rgb(204 126 210 / 36%) !important;
+    height: 36px;
+    color: #b6f8f0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.controlPanelAccordion::-webkit-scrollbar-thumb {
+    background: none !important;
+}
+::-webkit-scrollbar {
+    width: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+.dx-scrollable-scroll {
+    background-color: #b6f8f0 !important;
+    opacity: 0.7;
+    border: none;
+    border-radius: 5px;
+}
+/* .dx-widget.dx-scrollbar-vertical :hover {
+
+} */
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #b6f8f0;
+    border-radius: 5px;
+}
+#classObjectList {
+    padding: 10px !important;
+    background-color: #cc7ed25c;
+    height: 80vh;
+    border-radius: 10px;
+}
+tr.dx-row.dx-freespace-row.dx-column-lines {
+    display: none !important;
+    min-height: 0px !important;
+}
+#ontology > div {
+    background-color: inherit;
+    color: inherit !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+#contentCol {
+    height: 80vh !important;
+    color: inherit !important;
 }
 
-.App-link {
-  color: #61dafb;
+.relationAccordion > * {
+    background-color: inherit !important;
+    color: inherit !important;
+}
+div.dx-treelist-icon-container > div > span {
+    color: #b6f8f0 !important;
+}
+.accordion-item {
+    border: none !important;
+}
+/* .accordion-header {
+  border-top-color: #B6F8F0 !important;
+  border-left: none !important;
+  border-right: none !important;
+  color: inherit !important;
+} */
+
+/* .accordion-header ::after {
+  color: inherit !important;
+} */
+.relationAccordion > div > h2 > button {
+  background-color: inherit !important;
+  border-top: solid 1px;
+  border-bottom: solid 1px;
+  border-top-color: #b6f8f0 !important;
+  border-bottom-color: #b6f8f0 !important;
+  color: inherit !important;
+  padding-left: 0;
+}
+.relationAccordion > div > h2 > button:only-child {
+    border-top: solid 1px !important;
+    /* border-top-color: #b6f8f0 !important; */
+    border-bottom: solid 1px !important;
+    /* border-bottom-color: #b6f8f0 !important; */
+}
+.relationAccordion > div > h2 > button:first-child {
+    border-top: solid 1px !important;
+    /* border-top-color: #b6f8f0 !important; */
+    border-bottom: none !important;
+}
+.relationAccordion > div > h2 > button:last-child {
+    border-top: none !important;
+    border-bottom: solid 1px !important;
+    /* border-bottom-color: #b6f8f0 !important; */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* .relationAccordion > div > h2 > button {
+  background-color: inherit;
+  border-top: solid 1px;
+  border-bottom: solid 1px;
+  border-top-color: #b6f8f0 !important;
+  border-bottom-color: #b6f8f0 !important;
+  border-left: none !important;
+  border-right: none !important;
+  color: inherit !important;
+} */
+/* .relationAccordion > div > h2 > button ::after {
+    background-color: inherit !important;
+    color: inherit !important;
+    padding-left: 0;
+  } */
+#ontologyCol {
+    border-radius: 10px;
+    height: 80vh;
+    padding-left: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #cc7ed25c;
+    color: inherit !important;
+}
+#ontology {
+    font-family: inherit !important;
+    color: inherit !important;
 }
