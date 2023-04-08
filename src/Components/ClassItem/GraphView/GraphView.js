@@ -76,7 +76,7 @@ const GraphView = ({ graphData, root, filter, hideRelation }) => {
         //     // console.log(targetRef)
         setDimensions({
             width: window.innerWidth - 500,
-            height: window.innerHeight - 310,
+            height: window.innerHeight - 210,
         });
         // }
     }, [window]);
@@ -86,7 +86,7 @@ const GraphView = ({ graphData, root, filter, hideRelation }) => {
             // console.log(window.innerHeight, window.innerWidth)
             setDimensions({
                 width: window.innerWidth - 500,
-                height: window.innerHeight - 310,
+                height: window.innerHeight - 210,
             });
         }
         window.addEventListener("resize", handleWindowResize);
@@ -133,7 +133,7 @@ const GraphView = ({ graphData, root, filter, hideRelation }) => {
                     const bckgDimensions = [textWidth, fontSize].map(
                         (n) => n + fontSize * 0.2
                     ); // some padding
-                    ctx.fillStyle = "#B6F8F0";
+                    ctx.fillStyle = "#cc7ed2";
                     ctx.textAlign = "center";
 
                     ctx.textBaseline = "middle";

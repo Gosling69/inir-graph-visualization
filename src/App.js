@@ -3,12 +3,10 @@ import "./App.css";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Ontology from "./Pages/Ontology";
-import NavPanel from "./Components/Navs/NavPanel";
 import ClassObjectsList from "./Components/ClassObjectList/ClassObjectsList";
 import ClassItem from "./Components/ClassItem/ClassItem";
 import Footer from "./Components/Navs/Footer";
-import FullGraph from "./Components/FullGraph/FullGraph";
-
+import FullGraph from "./Pages/FullGraph/FullGraph";
 //Make Background animated as in landing sites
 
 function App() {
