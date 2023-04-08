@@ -17,7 +17,7 @@ body {
 #controlPanelButton > button {
     border-radius: inherit;
     border: none;
-    background-color: rgb(204 126 210 / 36%) !important;
+    background-color: #5e5583 !important;
     height: 36px;
     color: #b6f8f0;
 }
@@ -38,9 +38,7 @@ body {
     border: none;
     border-radius: 5px;
 }
-/* .dx-widget.dx-scrollbar-vertical :hover {
 
-} */
 /* Handle */
 ::-webkit-scrollbar-thumb {
     background: #b6f8f0;
@@ -76,12 +74,6 @@ div.dx-treelist-icon-container > div > span {
 .accordion-item {
     border: none !important;
 }
-/* .accordion-header {
-  border-top-color: #B6F8F0 !important;
-  border-left: none !important;
-  border-right: none !important;
-  color: inherit !important;
-} */
 
 .accordion-button.collapsed::after {
     margin-left: 250px;
@@ -120,22 +112,30 @@ div.dx-treelist-icon-container > div > span {
     border-bottom: solid 1px !important;
     /* border-bottom-color: #b6f8f0 !important; */
 }
-
-/* .relationAccordion > div > h2 > button {
-  background-color: inherit;
-  border-top: solid 1px;
-  border-bottom: solid 1px;
-  border-top-color: #b6f8f0 !important;
-  border-bottom-color: #b6f8f0 !important;
-  border-left: none !important;
-  border-right: none !important;
-  color: inherit !important;
-} */
-/* .relationAccordion > div > h2 > button ::after {
-    background-color: inherit !important;
-    color: inherit !important;
-    padding-left: 0;
-  } */
+.dropdown-item:hover {
+    background-color: #5e5583 !important ;
+    color: #b6f8f0 !important;
+}
+.dropdown-item:focus {
+    background-color: #5e5583 !important;
+    color: #b6f8f0 !important;
+}
+.dropdown-menu.show {
+    background-color: #5e5583;
+    color: inherit;
+}
+.dropdown-toggle.nav-link {
+    color: inherit;
+}
+.dropdown-toggle.nav-link:hover {
+    color: inherit;
+}
+.dropdown-toggle.nav-link:focus {
+    color: inherit;
+}
+.dropdown-toggle.show.nav-link {
+    color: inherit;
+}
 #ontologyCol {
     border-radius: 10px;
     height: 80vh;

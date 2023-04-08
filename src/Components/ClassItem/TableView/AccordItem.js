@@ -29,8 +29,9 @@ const AccordItem = ({ data, type }) => {
                         <Container className="mb-3 mx-4 mt-1">
                             {Object.values(prop.attributes).map(([arg]) => (
                                 <Row>
-                                    <Col>{arg.label}</Col>
-                                    <Col>{arg.literal ?? arg.value}</Col>
+                                    <Col xs={3}>{arg.label}</Col>
+                                    <Col xs={4}>{arg.literal ?? arg.value}</Col>
+                                    <Col></Col>
                                 </Row>
                             ))}
                         </Container>

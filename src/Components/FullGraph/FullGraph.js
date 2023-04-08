@@ -4,7 +4,17 @@ import { ForceGraphVR } from "react-force-graph";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import ApiService from "../../Api/Api";
 import makeGraphData from "../../GraphDataGenerator/graphDataGenerator";
+import {
+    paintLinks,
+    paintNodes,
+} from "../../GraphDataGenerator/commonGraphFuncs";
+import CyrillicToTranslit from "cyrillic-to-translit-js";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import * as THREE from "three";
+
 const FullGraph = (props) => {
+    const cyrillicToTranslit = new CyrillicToTranslit();
+
     const [data, setData] = useState({});
     const [rootId, setRootId] = useState("");
     const [filter, setFilter] = useState([]);
@@ -12,19 +22,6 @@ const FullGraph = (props) => {
         nodes: [],
         links: [],
     });
-    const paintNodes = (node) => {
-        // console.log(node)
-        if (node.id === rootId) return "#CC7ED2";
-        if (node.type === "straight") return "#B6F8F0";
-        if (node.type === "reverse") return "#89DC96";
-        if (node.type === "twoway") return "yellow";
-    };
-    const paintLinks = (link) => {
-        if (link.type === "straight") return "#B6F8F0";
-        if (link.type === "reverse") return "#89DC96";
-        if (link.type === "twoway") return "yellow";
-        return "black";
-    };
 
     const buttonStyle = {
         // width: "11rem",
@@ -66,7 +63,7 @@ const FullGraph = (props) => {
         setFilter([]);
         setTimeout(() => {
             ApiService.getObjectById(params.objectId).then((res) => {
-                console.log(res);
+                // console.log(res);
                 setGraphData(makeGraphData(res));
                 setData(res);
                 setTimeout(() => setRootId(res.label), 300);
@@ -76,9 +73,11 @@ const FullGraph = (props) => {
     useEffect(() => {
         refresh();
     }, []);
+
     useEffect(() => {
         refresh();
     }, [params.objectId]);
+
     const handleNodeClick = useCallback((node) => {
         // console.log(node)
         switch (node.type) {
@@ -109,10 +108,41 @@ const FullGraph = (props) => {
                     linkWidth={2}
                     linkDirectionalParticles={2}
                     height={window.innerHeight}
-                    nodeColor={paintNodes}
-                    nodeLabel="id"
-                    linkLabel="source.id"
+                    nodeColor={(node) => paintNodes(node, rootId)}
+                    nodeLabel={(node) =>
+                        cyrillicToTranslit.transform(node.label)
+                    }
+                    linkLabel={(link) =>
+                        cyrillicToTranslit.transform(link.hoverLabelVR)
+                    }
                     onNodeClick={handleNodeClick}
+                    nodeThreeObject={(node) => {
+                        let sphere = new THREE.Mesh(
+                            // new THREE.SphereGeometry(5),
+                            new THREE.BoxGeometry(5, 5, 5),
+                            new THREE.MeshLambertMaterial({
+                                color: node.color,
+                                transparent: true,
+                                opacity: 0,
+                            })
+                        );
+                        let loadedModel;
+                        const glftLoader = new GLTFLoader();
+                        glftLoader.load(
+                            "/assets/models/pepe/scene.gltf",
+                            (gltfScene) => {
+                                loadedModel = gltfScene;
+                                // console.log(loadedModel);
+                                gltfScene.scene.rotation.y = Math.PI / 8;
+                                gltfScene.scene.position.y = 3;
+                                // gltfScene.scene.scale.set(0.5, 0.5, 0.5);
+                                gltfScene.scene.scale.set(10, 10, 10);
+                                // gltfScene.scene.scale.set(5, 5, 5);
+                                sphere.add(gltfScene.scene);
+                            }
+                        );
+                        return sphere;
+                    }}
                 />
             ) : (
                 <Spinner className="text-center" animation="border" />

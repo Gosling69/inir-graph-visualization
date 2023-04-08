@@ -1,7 +1,8 @@
 import axios from "axios";
 
 export default class ApiService {
-    static endpoint = "http://localhost:8080/index.php?r=api";
+    // static endpoint = "http://localhost:8080/index.php?r=api";
+    static endpoint = process.env.REACT_APP_BACKEND_ADDRESS;
 
     static getFullTree = async () => {
         let response = await axios.get(ApiService.endpoint + "/get-tree");

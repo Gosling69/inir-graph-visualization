@@ -1,4 +1,11 @@
-import { useState, useMemo, useCallback, useRef, useEffect } from "react";
+import {
+    useState,
+    useMemo,
+    useCallback,
+    useRef,
+    useEffect,
+    useLayoutEffect,
+} from "react";
 import { matchRoutes, useNavigate } from "react-router-dom";
 import { ForceGraph3D, ForceGraph2D } from "react-force-graph";
 import { Row, Col, Button } from "react-bootstrap";
@@ -8,32 +15,15 @@ import Link2dObject from "./Link2dObject";
 import Node2dObject from "./Node2dObject";
 import SpriteText from "three-spritetext";
 import * as THREE from "three";
+import {
+    paintLinks,
+    paintNodes,
+} from "../../../GraphDataGenerator/commonGraphFuncs";
 
-const GraphView = ({
-    graphData,
-    root,
-    width,
-    height,
-    filter,
-    hideRelation,
-}) => {
+const GraphView = ({ graphData, root, filter, hideRelation }) => {
     let navigate = useNavigate();
     // console.log( width, height)
     // console.log(graphData);
-
-    const paintNodes = (node) => {
-        // console.log(node)
-        if (node.id === root) return "#CC7ED2";
-        if (node.type === "straight") return "#B6F8F0";
-        if (node.type === "reverse") return "#89DC96";
-        if (node.type === "twoway") return "yellow";
-    };
-    const paintLinks = (link) => {
-        if (link.type === "straight") return "#B6F8F0";
-        if (link.type === "reverse") return "#89DC96";
-        if (link.type === "twoway") return "yellow";
-        return "black";
-    };
 
     const nodesById = useMemo(() => {
         const nodesById = Object.fromEntries(
@@ -73,21 +63,53 @@ const GraphView = ({
     }, []);
 
     const fgRef = useRef();
-
+    const [dimensions, setDimensions] = useState({
+        width: 900,
+        height: 595,
+    });
+    useLayoutEffect(() => {
+        // console.log(targetRef)
+        // if (targetRef.current.parent){
+        //     console.log("PARENT")
+        // }
+        // if (targetRef.current) {
+        //     // console.log(targetRef)
+        setDimensions({
+            width: window.innerWidth - 500,
+            height: window.innerHeight - 310,
+        });
+        // }
+    }, [window]);
+    useEffect(() => {
+        function handleWindowResize() {
+            //   console.log(targetRef)
+            // console.log(window.innerHeight, window.innerWidth)
+            setDimensions({
+                width: window.innerWidth - 500,
+                height: window.innerHeight - 310,
+            });
+        }
+        window.addEventListener("resize", handleWindowResize);
+        return () => {
+            window.removeEventListener("resize", handleWindowResize);
+        };
+    }, []);
+    // console.log(graphData)
     return (
         <>
             <ForceGraph2D
                 ref={fgRef}
                 backgroundColor={"rgba(204, 126, 210, 0)"}
-                width={800}
-                height={595}
+                width={dimensions.width}
+                height={dimensions.height}
                 forceEngine="d3"
                 graphData={graphData}
                 linkColor={paintLinks}
                 linkWidth={2}
-                linkDirectionalParticles={2}
+                linkDirectionalParticles={showLinks ? 1 : 0}
+                //   linkDirectionalParticles={(link) => nodesById[link.target]}
                 // linkDirectionalParticleSpeed={1000}
-                nodeColor={paintNodes}
+                nodeColor={(node) => paintNodes(node, root)}
                 nodeLabel="hoverLabel"
                 linkLabel="hoverLabel"
                 onNodeClick={handleNodeClick}
@@ -96,11 +118,10 @@ const GraphView = ({
                     Link2dObject(link, ctx, globalScale, showLinks, paintLinks)
                 }
                 nodeCanvasObject={(node, ctx, globalScale) => {
-                    ctx.fillStyle = paintNodes(node);
+                    ctx.fillStyle = paintNodes(node, root);
                     ctx.beginPath();
                     ctx.arc(node.x, node.y, 3, 0, 2 * Math.PI, false);
                     ctx.fill();
-
                     const label =
                         node.label.length > 10
                             ? node.label.slice(0, 10) + "..."
@@ -113,8 +134,8 @@ const GraphView = ({
                         (n) => n + fontSize * 0.2
                     ); // some padding
                     ctx.fillStyle = "#B6F8F0";
-                    // ctx.fillRect(node.x - bckgDimensions[0] / 2, node.y - bckgDimensions[1] / 2, ...bckgDimensions);
                     ctx.textAlign = "center";
+
                     ctx.textBaseline = "middle";
                     ctx.fillText(label, node.x, node.y);
                     node.__bckgDimensions = bckgDimensions; // to re-use in nodePointerAreaPaint
@@ -170,23 +191,23 @@ const GraphView = ({
                 //   // Object.assign(sprite.rotation, alignAngle);
 
                 // }}
-                // nodeThreeObject={(node) => {
-                //   let sphere = new THREE.Mesh(
-                //     new THREE.SphereGeometry(5),
-                //     new THREE.MeshLambertMaterial({
-                //       color: node.color,
-                //       transparent: false,
-                //       // opacity: 0.7
-                //       })
-                //   )
-                //   // let sas = new THREE.Sprite()
+                //   nodeThreeObject={(node) => {
+                // let sphere = new THREE.Mesh(
+                //   new THREE.SphereGeometry(5),
+                //   new THREE.MeshLambertMaterial({
+                //     color: node.color,
+                //     transparent: false,
+                //     // opacity: 0.7
+                //     })
+                // )
+                //     // let sas = new THREE.Sprite()
 
-                //   let text = new SpriteText(node.label.length > 12 ? node.label.slice(0,12) + "..." : node.label);
-                //   text.color = node.color;
-                //   text.textHeight = 8;
-                //   sphere.add(text)
-                //   return sphere
-                // }}
+                //     let text = new SpriteText(node.label.length > 12 ? node.label.slice(0,12) + "..." : node.label);
+                //     text.color = node.color;
+                //     text.textHeight = 8;
+                //     sphere.add(text)
+                //     return sphere
+                //   }}
                 // graphData={graphData}
 
                 // linkLabel="label"

@@ -14,7 +14,7 @@ const GraphControlPanel = ({
     let navigate = useNavigate();
     let params = useParams();
     // const bgColor = "rgba(182, 248, 240, 0.7)"
-    const bgColor = "#CC7ED25C";
+    const bgColor = "#5E5583";
 
     const textColor = "#B6F8F0";
     const buttonStyle = {
@@ -65,6 +65,19 @@ const GraphControlPanel = ({
     //make position relative to graph
     return (
         <Container fluid style={containerStyle}>
+            <Row className="mb-4">
+                <Button
+                    onClick={() =>
+                        navigate(
+                            "../fullgraph/" +
+                                encodeURIComponent(params.objectId)
+                        )
+                    }
+                    style={buttonStyle}
+                >
+                    Go To 3D
+                </Button>
+            </Row>
             <Row className="mb-2">
                 <Button
                     onClick={() => hideRelation("straight")}
@@ -83,22 +96,10 @@ const GraphControlPanel = ({
             </Row>
             <Row className="mb-2">
                 <Button onClick={hideLinks} style={buttonStyle}>
-                    {showLinks ? "Hide" : "Show"} Link Text
+                    {showLinks ? "Hide" : "Show"} Link Lights
                 </Button>
             </Row>
-            <Row className="mb-2">
-                <Button
-                    onClick={() =>
-                        navigate(
-                            "../fullgraph/" +
-                                encodeURIComponent(params.objectId)
-                        )
-                    }
-                    style={buttonStyle}
-                >
-                    Go To 3D
-                </Button>
-            </Row>
+
             <Row>
                 <Accordion style={accordionStyle}>
                     <Accordion.Item style={accordionItemStyle} eventKey="0">

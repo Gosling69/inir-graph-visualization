@@ -4,8 +4,7 @@ const color = "#B6F8F0";
 const font = "Play";
 const tableLabelStyle = {
     // "background-color":"#cc7ed25c",
-    "background-color": "#6C447F",
-
+    "background-color": "#5E5583",
     "border-radius": "10px",
     color: color,
     margin: "-10px",
@@ -16,7 +15,7 @@ const labelStyle = {
     color: color,
     margin: "-10px",
     // "background-color":"#cc7ed25c",
-    "background-color": "#6C447F",
+    "background-color": "#5E5583",
     "border-radius": "10px",
     "font-family": font,
     padding: "5px 10px 5px 10px",
@@ -27,8 +26,16 @@ const styleToString = (style) => {
         ""
     );
 };
-const makeTableHoverLabel = (data, style) => {
+const makeTableHoverLabel = (data, style, returnHTML = true) => {
     if (isEmpty(data)) return "";
+    if (!returnHTML)
+        return Object.values(data)
+            .map(([prop]) => prop)
+            .reduce(
+                (prev, curr) =>
+                    prev + `${curr.label} : ${curr.literal ?? curr.value}\n`,
+                ""
+            );
     return `<div style=${styleToString(style)}>${Object.values(data)
         .map(([prop]) => prop)
         .reduce(
@@ -38,8 +45,9 @@ const makeTableHoverLabel = (data, style) => {
             ""
         )}</div>`;
 };
-const makeHoverLabel = (data, style) => {
+const makeHoverLabel = (data, style, returnHTML = true) => {
     if (isEmpty(data)) return "";
+    if (!returnHTML) return data;
     return `<div style=${styleToString(style)}>${data}</div>`;
 };
 const makeStraightRelations = (entry) => {
@@ -57,6 +65,11 @@ const makeStraightRelations = (entry) => {
                             prop.attributes ?? {},
                             tableLabelStyle
                         ),
+                        linkHoverLabelVR: makeTableHoverLabel(
+                            prop.attributes ?? {},
+                            tableLabelStyle,
+                            false
+                        ),
                         linkLabel: properties?.[0].label ?? "",
                     };
                 }) ?? [];
@@ -69,6 +82,11 @@ const makeStraightRelations = (entry) => {
                 linkHoverLabel: makeHoverLabel(
                     properties?.[0].label ?? "",
                     labelStyle
+                ),
+                linkHoverLabelVR: makeHoverLabel(
+                    properties?.[0].label ?? "",
+                    labelStyle,
+                    false
                 ),
                 hoverLabel: makeHoverLabel(label, labelStyle),
                 childNodes: childNodes,
@@ -95,6 +113,11 @@ const makeReverseRelations = (entry) => {
                             prop.attributes ?? {},
                             tableLabelStyle
                         ),
+                        linkHoverLabelVR: makeTableHoverLabel(
+                            prop.attributes ?? {},
+                            tableLabelStyle,
+                            false
+                        ),
                         linkLabel: Array.isArray(properties)
                             ? properties?.[0].label
                             : properties?.[2].label ?? "",
@@ -112,6 +135,7 @@ const makeReverseRelations = (entry) => {
                 label: label,
                 linkLabel: linkLabel,
                 linkHoverLabel: makeHoverLabel(linkLabel, labelStyle),
+                linkHoverLabelVR: makeHoverLabel(linkLabel, labelStyle, false),
                 hoverLabel: makeHoverLabel(label, labelStyle),
                 childNodes: childNodes,
             };
@@ -169,6 +193,7 @@ const makeGraphData = (entry, filter = []) => {
                 type: "straight",
                 label: node.linkLabel,
                 hoverLabel: child.linkHoverLabel ?? "NOT FOUND",
+                hoverLabelVR: child.linkHoverLabelVR ?? "NOT FOUND",
                 skipLabel: true,
             });
         });
@@ -177,6 +202,7 @@ const makeGraphData = (entry, filter = []) => {
             target: node.id,
             type: "straight",
             hoverLabel: node.linkHoverLabel ?? "NOT FOUND",
+            hoverLabelVR: node.linkHoverLabelVR ?? "NOT FOUND",
             label: node.linkLabel,
         });
     });
@@ -190,6 +216,7 @@ const makeGraphData = (entry, filter = []) => {
                     type: "reverse",
                     label: node.linkLabel,
                     hoverLabel: child.linkHoverLabel ?? "NOT FOUND",
+                    hoverLabelVR: child.linkHoverLabelVR ?? "NOT FOUND",
                     skipLabel: true,
                 });
             });
@@ -199,6 +226,7 @@ const makeGraphData = (entry, filter = []) => {
             target: root.id,
             type: "reverse",
             hoverLabel: node.linkHoverLabel ?? "NOT FOUND",
+            hoverLabelVR: node.linkHoverLabelVR ?? "NOT FOUND",
             label: node.linkLabel,
         });
     });

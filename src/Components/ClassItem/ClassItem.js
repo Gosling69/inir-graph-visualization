@@ -12,7 +12,6 @@ import TableView from "./TableView/TableView";
 import GraphView from "./GraphView/GraphView";
 import makeGraphData from "../../GraphDataGenerator/graphDataGenerator";
 import { cloneDeep } from "lodash";
-// import { v4 as uuidv4 } from 'uuid';
 
 const ClassItem = () => {
     const [activeTab, setActiveTab] = useState("tableView");
@@ -75,19 +74,10 @@ const ClassItem = () => {
             ApiService.getObjectById(params.objectId).then((res) => {
                 console.log(res);
                 setGraphData(makeGraphData(res));
-                // setRootId(res.label)
                 setData(res);
-                // setTimeout(() =>setFilter(["reverse"]),100)
-                // setTimeout(() => setGraphData(makeGraphData(res)),100)
                 setTimeout(() => setRootId(res.label), 300);
-                // setTimeout(() => setActiveTab("graphView"), 300)
-                // setTimeout(() => {
-                //     setRootId(res.label + "sas")
-                // }, 100)
             });
         }, 300);
-        // setFilter(["reverse"])
-        // setTimeout(() => setFilter([]), 100)
     };
     useEffect(() => {
         refresh();
@@ -203,4 +193,5 @@ const ClassItem = () => {
         </Tab.Container>
     );
 };
+
 export default ClassItem;

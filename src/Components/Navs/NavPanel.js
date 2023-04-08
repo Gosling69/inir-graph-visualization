@@ -1,14 +1,22 @@
-import { Row, Col, Container, Navbar, Nav, Button } from "react-bootstrap";
-
-const NavPanel = (props) => {
+import {
+    Row,
+    Col,
+    Container,
+    Navbar,
+    Nav,
+    Button,
+    NavDropdown,
+} from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+const NavPanel = () => {
+    let navigate = useNavigate();
     const linkNamesMap = {
-        "/admin": "Admin",
-        "/about": "About",
-        "/": "Main",
-        "/ontology": "Ontology",
+        "https://uniserv.iis.nsk.su/rdms/index.php?r=site%2Fabout": "About",
+        "https://uniserv.iis.nsk.su/rdms/index.php?r=site%2Findex": "Main",
+        "/": "Ontology",
     };
     const titleStyle = {
-        marginTop: "30px",
+        marginTop: "0px",
         paddingLeft: "20px",
         paddingBottom: "10px",
         fontFamily: "Play",
@@ -18,55 +26,45 @@ const NavPanel = (props) => {
         lineHeight: "39px",
         textTransform: "uppercase",
     };
+    const linkStyle = {
+        // marginLeft:"auto",
+        color: "#CC7ED2B2",
+    };
+    const menuStyle = {
+        color: "#CC7ED2B2",
+
+        // backgroundColor:"#cc7ed25c",
+    };
 
     return (
         <Container fluid style={{ borderBottom: "solid 1px" }}>
-            {/* <Navbar 
-            // variant="dark"
-            // bg="dark"
-            // style={{
-            //     "borderRadius":"0 0 10px 10px",
-            //     "backgroundColor":"#FBEA58",
-            //     "boxShadow": "0px 4px 5px rgba(0, 0, 0, 0.25)",
-            // }} 
-            sticky='top' 
-        > */}
-            <Row>
-                {/* <Col xs={1}>
-                    <Button>Main</Button>
+            <Row></Row>
+            <Row className="mt-3">
+                <Col className="mx-0" xs={9}>
+                    <h1 style={titleStyle}>
+                        ПОДДЕРЖКА ПРИНЯТИЯ РЕШЕНИЙ В СЛАБОФОРМАЛИЗОВАННЫХ
+                        ОБЛАСТЯХ
+                    </h1>
                 </Col>
-                <Col xs={1}>
-                    <Button>Ontology</Button>
+                <Col>
+                    <Nav className="justify-content-end" style={linkStyle}>
+                        <NavDropdown style={menuStyle} title="Menu">
+                            {Object.entries(linkNamesMap).map(
+                                ([href, text]) => (
+                                    <NavDropdown.Item
+                                        style={linkStyle}
+                                        onClick={() => {
+                                            window.location.href = href;
+                                        }}
+                                    >
+                                        {text}
+                                    </NavDropdown.Item>
+                                )
+                            )}
+                        </NavDropdown>
+                    </Nav>
                 </Col>
-                <Col xs={1}>
-                    <Button>About</Button>
-                </Col>
-                <Col></Col> */}
-                {/* <Nav
-                    style={{
-                        "marginRight":"auto",
-                        "color":"black"
-                    }}
-                >
-                    {Object.entries(linkNamesMap).map(([link, name]) =>
-                        <Nav.Link 
-                            // style={whereabouts === link ? style():{}} 
-                            className='mx-5' 
-                            // active={whereabouts === link} 
-                            href={link}
-                            key={name}
-                        >
-                            {name}
-                        </Nav.Link>
-                    )}
-                </Nav> */}
             </Row>
-            <Row>
-                <h1 style={titleStyle}>
-                    ПОДДЕРЖКА ПРИНЯТИЯ РЕШЕНИЙ В СЛАБОФОРМАЛИЗОВАННЫХ ОБЛАСТЯХ
-                </h1>
-            </Row>
-            {/* </Navbar> */}
         </Container>
     );
 };
