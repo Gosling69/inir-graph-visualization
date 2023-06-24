@@ -14,11 +14,10 @@ const Ontology = (props) => {
             setOntologyTree(res);
         });
     }, []);
-
     return (
         <>
             <NavPanel />
-            <Row className="mt-3 mb-0 mx-3">
+            <Row className="mt-3 mb-0 mx-4">
                 <Col id="ontologyCol" xs={3}>
                     <OntologyTree data={ontologyTree} />
                 </Col>

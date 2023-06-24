@@ -75,7 +75,7 @@ const GraphControlPanel = ({
                     }
                     style={buttonStyle}
                 >
-                    Go To 3D
+                    3D Режим
                 </Button>
             </Row>
             <Row className="mb-2">
@@ -83,7 +83,7 @@ const GraphControlPanel = ({
                     onClick={() => hideRelation("straight")}
                     style={buttonStyle}
                 >
-                    {filter.includes("straight") ? "Show" : "Hide"} Straight
+                    {filter.includes("straight") ? "Показать" : "Скрыть"} Прямые
                 </Button>
             </Row>
             <Row className="mb-2">
@@ -91,15 +91,14 @@ const GraphControlPanel = ({
                     onClick={() => hideRelation("reverse")}
                     style={buttonStyle}
                 >
-                    {filter.includes("reverse") ? "Show" : "Hide"} Reverse
+                    {filter.includes("reverse") ? "Показать" : "Скрыть"} Обратные
                 </Button>
             </Row>
             <Row className="mb-2">
                 <Button onClick={hideLinks} style={buttonStyle}>
-                    {showLinks ? "Hide" : "Show"} Link Lights
+                    {showLinks ? "Скрыть" : "Показать"} Частицы на ребрах
                 </Button>
             </Row>
-
             <Row>
                 <Accordion style={accordionStyle}>
                     <Accordion.Item style={accordionItemStyle} eventKey="0">
@@ -107,7 +106,7 @@ const GraphControlPanel = ({
                             id="controlPanelButton"
                             style={accordionItemStyle}
                         >
-                            Hide Relations
+                            Скрыть связи
                         </Accordion.Header>
                         <Accordion.Body
                             className="controlPanelAccordion"
@@ -120,7 +119,7 @@ const GraphControlPanel = ({
                                         onClick={() => hideRelation(el)}
                                         style={accordionButtonStyle}
                                     >
-                                        {!filter.includes(el) ? "Hide" : "Show"}{" "}
+                                        {!filter.includes(el) ? "Скрыть" : "Показать"}{" "}
                                         {el}
                                     </p>
                                 </Row>

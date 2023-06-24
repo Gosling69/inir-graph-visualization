@@ -7,7 +7,11 @@ import ClassObjectsList from "./Components/ClassObjectList/ClassObjectsList";
 import ClassItem from "./Components/ClassItem/ClassItem";
 import Footer from "./Components/Navs/Footer";
 import FullGraph from "./Pages/FullGraph/FullGraph";
+import React from "react";
+
 //Make Background animated as in landing sites
+//extract refresh into custom hook, maybe also extract generateGraphData
+
 
 function App() {
     return (

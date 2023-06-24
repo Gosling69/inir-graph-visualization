@@ -22,9 +22,6 @@ import {
 
 const GraphView = ({ graphData, root, filter, hideRelation }) => {
     let navigate = useNavigate();
-    // console.log( width, height)
-    // console.log(graphData);
-
     const nodesById = useMemo(() => {
         const nodesById = Object.fromEntries(
             graphData.nodes.map((node) => [node.id, node])
@@ -135,7 +132,6 @@ const GraphView = ({ graphData, root, filter, hideRelation }) => {
                     ); // some padding
                     ctx.fillStyle = "#cc7ed2";
                     ctx.textAlign = "center";
-
                     ctx.textBaseline = "middle";
                     ctx.fillText(label, node.x, node.y);
                     node.__bckgDimensions = bckgDimensions; // to re-use in nodePointerAreaPaint

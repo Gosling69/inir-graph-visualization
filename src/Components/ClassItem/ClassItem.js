@@ -17,33 +17,7 @@ const ClassItem = () => {
     const [activeTab, setActiveTab] = useState("tableView");
     const targetRef = useRef(null);
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-    //   useLayoutEffect(() => {
-    //     // console.log(targetRef)
-    //     // if (targetRef.current.parent){
-    //     //     console.log("PARENT")
-    //     // }
-    //     if (targetRef.current) {
-    //         // console.log(targetRef)
-    //       setDimensions({
-    //         width: targetRef.current.clientWidth,
-    //         height: targetRef.current.clientHeight,
-    //       });
-    //     }
-    //   }, []);
-    //   useLayoutEffect(() => {
-    //     // console.log(targetRef);
-    //     // console.log(targetRef.current.offsetWidth, targetRef.current.offsetHeight);
-    //     setDimensions({
-    //         width: targetRef.current.clientWidth,
-    //         height: targetRef.current.clientHeight,
-    //     });
-    //     // if (targetRef.current) {
-    //     //     setDimensions({
-    //     //         width: targetRef.current.offsetWidth,
-    //     //         height: targetRef.current.offsetHeight
-    //     //     });
-    //     // }
-    //   }, [targetRef]);
+ 
 
     let params = useParams();
     const [data, setData] = useState({});
@@ -68,8 +42,8 @@ const ClassItem = () => {
     };
 
     const refresh = () => {
-        setRootId("");
-        setFilter([]);
+        setRootId(() => "");
+        setFilter(() => []);
         setTimeout(() => {
             ApiService.getObjectById(params.objectId).then((res) => {
                 console.log(res);
@@ -79,26 +53,16 @@ const ClassItem = () => {
             });
         }, 300);
     };
+
     useEffect(() => {
         refresh();
     }, []);
+
     useEffect(() => {
         refresh();
     }, [params.objectId]);
 
-    //   useEffect(() => {
-    //     function handleWindowResize() {
-    //     //   console.log(targetRef)
-    //       setDimensions({
-    //         width: targetRef.current.clientWidth,
-    //         height: targetRef.current.clientHeight,
-    //       });
-    //     }
-    //     window.addEventListener("resize", handleWindowResize);
-    //     return () => {
-    //       window.removeEventListener("resize", handleWindowResize);
-    //     };
-    //   }, []);
+
 
     const buttonActiveStyle = {
         borderRadius: "10px 10px 0px 0px",
@@ -134,7 +98,7 @@ const ClassItem = () => {
                 }
                 onClick={() => onButtonClick("tableView")}
             >
-                Table View
+                Табличное представление
             </Button>
 
             <Button
@@ -146,7 +110,7 @@ const ClassItem = () => {
                 }
                 onClick={() => onButtonClick("graphView")}
             >
-                Graph View
+                Графовое представление
             </Button>
             <Row ref={targetRef}>
                 <Col>

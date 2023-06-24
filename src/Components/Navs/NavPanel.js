@@ -11,9 +11,9 @@ import { useNavigate } from "react-router-dom";
 const NavPanel = () => {
     let navigate = useNavigate();
     const linkNamesMap = {
-        "https://uniserv.iis.nsk.su/rdms/index.php?r=site%2Fabout": "About",
-        "https://uniserv.iis.nsk.su/rdms/index.php?r=site%2Findex": "Main",
-        "/": "Ontology",
+        "https://uniserv.iis.nsk.su/rdms/index.php?r=site%2Fabout": "О ресурсе",
+        "https://uniserv.iis.nsk.su/rdms/index.php?r=site%2Findex": "Главная",
+        "/": "Онтология",
     };
     const titleStyle = {
         marginTop: "0px",
@@ -48,11 +48,12 @@ const NavPanel = () => {
                 </Col>
                 <Col>
                     <Nav className="justify-content-end" style={linkStyle}>
-                        <NavDropdown style={menuStyle} title="Menu">
+                        <NavDropdown style={menuStyle} title="Меню">
                             {Object.entries(linkNamesMap).map(
                                 ([href, text]) => (
                                     <NavDropdown.Item
                                         style={linkStyle}
+                                        key={href}
                                         onClick={() => {
                                             window.location.href = href;
                                         }}

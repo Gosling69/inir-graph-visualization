@@ -5,7 +5,8 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import ApiService from "../../Api/Api";
 import makeGraphData from "../../GraphDataGenerator/graphDataGenerator";
 
-import { paintLinks, paintNodes } from "../../GraphDataGenerator/commonGraphFuncs";
+import { paintLinks,
+paintNodes } from "../../GraphDataGenerator/commonGraphFuncs";
 import CyrillicToTranslit from "cyrillic-to-translit-js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
@@ -22,12 +23,7 @@ const FullGraph = (props) => {
     });
 
     const buttonStyle = {
-        // width: "11rem",
-        // paddingBottom: "10px",
-        // marginBottom: "10px",
         border: "none",
-        // borderRadius:"25px",
-        // minHeight:"36px !important",
         cursor: "pointer",
         color: "#B6F8F0",
         backgroundColor: "#CC7ED25C",
@@ -53,6 +49,7 @@ const FullGraph = (props) => {
         );
         return nodesById;
     }, [graphData]);
+
     const onButtonClick = () => {
         navigate("../object/" + encodeURIComponent(params.objectId));
     };

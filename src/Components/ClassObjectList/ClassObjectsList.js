@@ -5,7 +5,7 @@ import ApiService from "../../Api/Api";
 import { useNavigate } from "react-router-dom";
 import ListItem from "./ListItem";
 
-const ClassObjectsList = (props) => {
+const ClassObjectsList = () => {
     const [data, setData] = useState({});
 
     let params = useParams();
@@ -37,7 +37,7 @@ const ClassObjectsList = (props) => {
                 }}
             >
                 {Object.entries(data).map(([href, realData], index) => (
-                    <ListItem href={href} realData={realData} index={index} />
+                    <ListItem key={href} href={href} realData={realData} index={index} />
                 ))}
                 {/* <Outlet/> */}
             </div>

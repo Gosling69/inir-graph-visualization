@@ -96,6 +96,7 @@ div.dx-treelist-icon-container > div > span {
     color: inherit !important;
     padding-left: 0;
 }
+
 .relationAccordion > div > h2 > button:only-child {
     border-top: solid 1px !important;
     /* border-top-color: #b6f8f0 !important; */

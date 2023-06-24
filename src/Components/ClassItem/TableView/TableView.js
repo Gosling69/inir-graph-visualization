@@ -1,11 +1,9 @@
 import { Row, Col, Container } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 // import Accordion from 'devextreme-react/accordion';
 import AccordItem from "./AccordItem";
 import AccordTitle from "./AccordTitle";
 import { Accordion } from "react-bootstrap";
 import { isEmpty } from "lodash";
-import { v4 as uuidv4 } from "uuid";
 
 const TableView = ({ data }) => {
     const style = {
@@ -30,7 +28,7 @@ const TableView = ({ data }) => {
             {/* <h2 style={titleStyle} >{data.label}</h2> */}
             <Container style={style} fluid>
                 <Row style={{ marginTop: "35px" }}>
-                    <Col xs={3}>Properties</Col>
+                    <Col xs={3}>Свойства</Col>
                     <Col>
                         {Object.values(data.properties ?? {}).map(([prop]) => (
                             <Row key={prop.id}>
@@ -48,7 +46,7 @@ const TableView = ({ data }) => {
                 <Row className="mt-3">
                     {!isEmpty(data.straightRelations) && (
                         <>
-                            <Col xs={3}>Straight Relations</Col>
+                            <Col xs={3}>Прямые Связи</Col>
                             <Col>
                                 <Accordion
                                     className="relationAccordion"
@@ -59,7 +57,7 @@ const TableView = ({ data }) => {
                                         data.straightRelations ?? {}
                                     ).map((entry, index) => (
                                         <>
-                                            <Accordion.Item eventKey={index}>
+                                            <Accordion.Item key={index} eventKey={index}>
                                                 <Accordion.Header>
                                                     {
                                                         <AccordTitle
@@ -87,7 +85,7 @@ const TableView = ({ data }) => {
                 <Row className="mt-3 mb-5">
                     {!isEmpty(data.reverseRelations) && (
                         <>
-                            <Col xs={3}>Reverse Relations</Col>
+                            <Col xs={3}>Обратные связи</Col>
                             <Col>
                                 <Accordion
                                     className="relationAccordion"
@@ -98,7 +96,7 @@ const TableView = ({ data }) => {
                                         data.reverseRelations ?? {}
                                     ).map((entry, index) => (
                                         <>
-                                            <Accordion.Item eventKey={index}>
+                                            <Accordion.Item key={index} eventKey={index}>
                                                 <Accordion.Header>
                                                     {
                                                         <AccordTitle
